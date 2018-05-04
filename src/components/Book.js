@@ -9,7 +9,7 @@ class Book extends Component {
 
     render() {
         const {book, onChooseBook} = this.props
-
+        
         return (
             <li key={book.id}>
                 <div className="book">
@@ -21,8 +21,9 @@ class Book extends Component {
                                  backgroundImage: `url(${book.imageLinks.thumbnail})`
                              }}/>
                         <div className="book-shelf-changer">
-                            <select defaultValue={book.shelf} onChange={(event) => onChooseBook(event, book)}>
-                                <option value="" disabled>Move to...</option>
+                            <select defaultValue={book.shelf ? book.shelf : "none"}
+                                    onChange={(event) => onChooseBook(event, book)}>
+                                <option value="moveTo" disabled>Move to...</option>
                                 <option value="currentlyReading">Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>
                                 <option value="read">Read</option>

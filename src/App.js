@@ -24,12 +24,10 @@ class BooksApp extends Component {
 
     handleChange = (event, selectedBook) => {
         const shelf = event.target.value;
-        BooksAPI.update(selectedBook, shelf).then(() => {
-            selectedBook.shelf = shelf;
-            this.setState((state) => ({
-                books: state.books.filter(b => b.id !== selectedBook.id).concat([selectedBook])
-            }))
-        })
+
+        BooksAPI.update(selectedBook, shelf)
+            .then(BooksAPI.getAll)
+            .then((books) => this.setState({ books }))
 
     };
 
