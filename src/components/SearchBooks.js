@@ -18,7 +18,7 @@ class SearchBooks extends Component {
 
     updateQuery = (query) => {
         this.setState(() => ({
-            query: query.trim()
+            query: query
         }))
     }
 
@@ -27,7 +27,6 @@ class SearchBooks extends Component {
             query: '',
             books: []
         })
-        return this.state.books
     }
 
     handleSearch = (query) => {
@@ -44,6 +43,8 @@ class SearchBooks extends Component {
                                 .filter((b) => b.id === book.id)
                                 .map(b => book.shelf = b.shelf)))
                         this.setState({books})
+                    }else{
+                        this.setState({books: []})
                     }
                 })
             }
@@ -66,6 +67,8 @@ class SearchBooks extends Component {
         if (query === '') {
             searchResult = []
         } else {
+            console.log('books',books)
+            console.log('query',query)
             searchResult = books
         }
 
