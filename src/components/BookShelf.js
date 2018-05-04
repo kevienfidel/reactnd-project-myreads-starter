@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-
 import Book from './Book'
 
 class BookShelf extends Component {
@@ -8,7 +7,7 @@ class BookShelf extends Component {
         books: PropTypes.array.isRequired,
         category: PropTypes.string.isRequired,
         onChooseBook: PropTypes.func.isRequired
-    }
+    };
 
     render() {
         const {books, category, onChooseBook} = this.props
@@ -27,8 +26,6 @@ class BookShelf extends Component {
                     </ol>
                 </div>
             </div>
-
-
         )
     }
 

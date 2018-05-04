@@ -7,14 +7,16 @@ class BookList extends Component {
     static propTypes = {
         books: PropTypes.array.isRequired,
         onChooseBook: PropTypes.func.isRequired
-    }
-
+    };
 
     render() {
-        const SHELVES = [{category: 'Currently Reading', name: 'currentlyReading'},
+        const SHELVES = [
+            {category: 'Currently Reading', name: 'currentlyReading'},
             {category: 'Want To Read', name: 'wantToRead'},
-            {category: 'Read', name: 'read'}]
-        const {books, onChooseBook} = this.props
+            {category: 'Read', name: 'read'}
+        ];
+
+        const {books, onChooseBook} = this.props;
 
         return (
             <div className="list-books">
@@ -34,7 +36,7 @@ class BookList extends Component {
                     </div>
                 </div>
                 <div className="open-search">
-                    <Link to='/search'>
+                    <Link to="/search">
                         Add a book</Link>
                 </div>
             </div>

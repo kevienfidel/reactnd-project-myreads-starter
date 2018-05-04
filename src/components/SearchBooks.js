@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
-
 import Book from './Book'
 import * as BooksAPI from '../BooksAPI'
 
@@ -9,68 +8,53 @@ class SearchBooks extends Component {
     static propTypes = {
         selectedBooks: PropTypes.array,
         onChooseBook: PropTypes.func.isRequired
-    }
+    };
 
     state = {
         query: '',
         books: [],
-    }
+    };
 
     updateQuery = (query) => {
         this.setState(() => ({
             query: query
         }))
-    }
+    };
 
     clearQuery = () => {
         this.setState({
             query: '',
             books: []
         })
-    }
+    };
 
     handleSearch = (query) => {
         if (query === '') {
-            this.clearQuery(query)
+            this.clearQuery(query);
         } else {
-            this.updateQuery(query)
+            this.updateQuery(query);
             if (this.state.query !== '') {
                 BooksAPI.search(query).then(books => {
                     if (!books.error) {
-                        books.map((book) => (book.shelf = 'none')) //initializing shelf attribute to 'none'
+                        books.map((book) => (book.shelf = 'none'));
                         books.map((book) => (
                             this.props.selectedBooks
                                 .filter((b) => b.id === book.id)
-                                .map(b => book.shelf = b.shelf)))
+                                .map(b => book.shelf = b.shelf)));
                         this.setState({books})
-                    }else{
+                    } else {
                         this.setState({books: []})
                     }
                 })
             }
         }
-    }
-
-    componentDidMount(){
-        console.log('componentDidMount called')
-    }
+    };
 
     render() {
-        const {onChooseBook} = this.props
-        const {query, books} = this.state
-        let searchResult
+        const {onChooseBook} = this.props;
+        const {query, books} = this.state;
 
-        //the this.state.books doesn't reflected to be cleared by clearQuery()
-        //the condition below will force to empty the array for searchResult unless
-        //the request from the API with late response will overwrite this.state.books
-        //Temporary solution below:
-        if (query === '') {
-            searchResult = []
-        } else {
-            console.log('books',books)
-            console.log('query',query)
-            searchResult = books
-        }
+        const searchResult = query === '' ? [] : books;
 
         return (
             <div className="search-books">
