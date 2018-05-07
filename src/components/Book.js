@@ -9,7 +9,7 @@ class Book extends Component {
 
     render() {
         const {book, onChooseBook} = this.props
-        
+
         return (
             <li key={book.id}>
                 <div className="book">
